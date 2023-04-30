@@ -1,0 +1,40 @@
+﻿@model OrderEditViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+<div class="col-lg-8">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">General Form Elements</h5>
+            <!-- General Form Elements -->
+            <form asp-controller="order" asp-action="edit" method="post">             
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Order State</label>
+                    <div class="col-sm-10">
+                        <select asp-for="OrderState" class="form-select" aria-label="Default select example">
+                            <option selected="null"></option>
+                            @foreach (var item in ViewBag.OrderState)
+                            {
+                                <option>@item.Text</option>
+                            }   
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Update!" class="btn btn-outline-success" />
+                </div>
+                <label></label>
+            </form><!-- End General Form Elements -->
+            <div class="project-info-box mt-0 mb-0">
+                <p class="mb-0">
+                    <a href="/order/list" class="btn btn-outline-info"> <i class="fa fa-arrow-left"></i>Back To list </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+

@@ -1,0 +1,100 @@
+﻿@model List<BasketItemViewModel>
+@{
+    ViewData["Title"] = "Card List";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@if (TempData["OrderSuccess"] is not null)
+{
+    <div class="container-fluid pt-5">
+        <div class="row-px-xl-5">
+            @Html.Raw( @TempData["OrderSuccess"])
+        </div>
+    </div>
+}
+@if (Model.Count == 0)
+{
+    <div class="container-fluid pt-5">
+        <div class="row-px-xl-5">
+            <div class="alert alert-warning" role="alert">
+                Sepetinizde ürün bulunmamaktadır !!!
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        </div>
+    </div>
+}
+<div class="container-fluid pt-5">
+    <div class="row px-xl-5">
+        <div class="col-lg-8 table-responsive mb-5">
+
+            <table class="table table-bordered text-center mb-0">
+                <thead class="bg-secondary text-dark">
+                    <tr>
+                        <th>Products</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                        <th>Remove</th>
+                    </tr>
+                </thead>
+                <tbody class="align-middle">
+
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="align-middle"><img src="@item.Product.Picture" alt="" style="width: 50px;">@item.Product.ProductName</td>
+                            <td class="align-middle">@item.Product.UnitPrice</td>
+                            <td class="align-middle">
+                                <div class="input-group quantity mx-auto" style="width: 100px;">
+                                    <div class="input-group-btn">
+                                        <a href="/card/delete/@item.Product.Id" class="btn btn-sm btn-primary btn-minus">
+                                            <i class="fa fa-minus"></i>
+                                        </a>
+                                    </div>
+                                    <input type="text" class="form-control form-control-sm bg-secondary text-center" value="@item.Quantity">
+                                    <div class="input-group-btn">
+                                        <a href="/card/add/@item.Product.Id" class="btn btn-sm btn-primary btn-plus">
+                                            <i class="fa fa-plus"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="align-middle">@item.SubToTalPrice</td>
+                            <td class="align-middle"><a href="/card/deleteallitems/@item.Product.Id" class="btn btn-sm btn-primary"><i class="fa fa-times"></i></a></td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-secondary mb-5">
+                <div class="card-header bg-secondary border-0">
+                    <h4 class="font-weight-semi-bold m-0">Cart Summary</h4>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-between mb-3 pt-1">
+                        <h6 class="font-weight-medium">Subtotal</h6>
+                        <h6 class="font-weight-medium">@Model.Sum(x=>x.SubToTalPrice)</h6>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                        <h6 class="font-weight-medium">Shipping</h6>
+                        <h6 class="font-weight-medium">$10</h6>
+                    </div>
+                </div>
+                <div class="card-footer border-secondary bg-transparent">
+                    <div class="d-flex justify-content-between mt-2">
+                        <h5 class="font-weight-bold">Total</h5>
+                        <h5 class="font-weight-bold">$@(Model.Sum(x => x.SubToTalPrice) + 10)</h5>
+                    </div>
+                    <a href="/order/checkout" class="btn btn-block btn-primary my-3 py-3">Proceed To Checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

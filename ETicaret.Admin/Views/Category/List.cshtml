@@ -1,0 +1,86 @@
+﻿@model IEnumerable<ETicaret.Admin.Models.CategoryViewModel>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@section styles
+    {
+
+    <link href="~/assets/datatables/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="~/assets/datatables/datatables.bootstrap4.min.css" rel="stylesheet" />
+}
+    @section scripts
+    {
+    <script src="~/assets/datatables/jquery.datatables.min.js"></script>
+    <script src="~/assets/datatables/datatables.bootstrap4.min.js"></script>
+    <!-- Page level custom scripts -->
+    <script src="~/assets/datatables/datatables-demo.js"></script>
+}
+    <h2>Category List</h2>
+    <div>
+        <p class="col-lg-9">
+
+            <a href="/category/create" class="btn btn-outline-success"> <i class="fa fa-plus-circle"></i>  Create New !</a>
+
+        </p>
+    </div>
+@if (TempData["CreateSuccess"] != null)
+{
+    @Html.Raw(TempData["CreateSuccess"])
+}
+@if (TempData["DeletingState"] != null)
+{
+    @Html.Raw(TempData["DeletingState"])
+}
+
+
+<div class="card">
+    <div class="card-head">
+        <div class="card-body">
+            <br />
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Description)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(x => x.Picture)
+                        </th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.CategoryName)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                <img style="width:150px;height: 100px" src="data:image;base64, @item.ImageString" alt="Kategori resmi" />
+                            </td>
+                            <td>
+                                <a href="/category/edit/@item.Id" class="btn btn-outline-warning" title="Edit Category"><i class="fa fa-edit"></i>Edit</a>
+                                <a href="/category/delete/@item.Id" class="btn btn-outline-danger" title="Delete Category"><i class="fa fa-trash"></i>Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+
+
+

@@ -1,0 +1,39 @@
+﻿@model LoginViewModel
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="card-body">
+    <h2 class="title">Sign In</h2>
+    <form asp-controller="account" asp-action="login" method="post">
+        <div class="row row-space">
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">E-Mail</label>
+                    <input asp-for="EMail" class="input--style-4" type="email" placeholder="example@mail.com">
+                </div>
+            </div>
+            <div class="col-2">
+                <div class="input-group">
+                    <label class="label">Password</label>
+                    <input asp-for="Password" class="input--style-4" type="password">
+                </div>
+            </div>
+        </div>
+ 
+
+        <div class="p-t-20">
+            <button class="btn btn--radius-2 btn--blue" type="submit">Login</button>
+        </div>
+        <br />
+        <div class="col-12">
+            <a class="small mb-0" href="/account/ForgotPassword">Forgot my password</a>
+        </div>
+        <br />
+        <div class="col-12">
+            <p class="small mb-0">Don't have account? <a href="/account/register">Create an account</a></p>
+        </div>
+    </form>
+</div>
+

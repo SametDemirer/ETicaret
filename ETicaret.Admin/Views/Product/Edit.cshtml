@@ -1,0 +1,74 @@
+﻿@model ProductViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@if (ViewBag.EditState != null)
+{
+    <div>
+        @Html.Raw(ViewBag.EditState)
+    </div>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Add New Product</h5>
+                <form asp-controller="Product" asp-action="Edit" method="post" enctype="multipart/form-data">
+                                       <div class="form-group">
+                        <label>Product Name</label>
+                        <input asp-for="ProductName" class="form-control" />
+                        <span asp-validation-for="ProductName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Unit Price</label>
+                        <input asp-for="UnitPrice" class="form-control" />
+                        <span asp-validation-for="UnitPrice" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Unit In Stock</label>
+                        <input asp-for="UnitInStock" class="form-control" />
+                        <span asp-validation-for="UnitInStock" class="text-danger"></span>
+                    </div>
+                    <div class="form-group">
+                        <label>Description</label>
+                        <div class="col-sm-12">
+                            <textarea asp-for="Description" class="form-control" style="height: 100px"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Product Category</label>
+                        <div class="col-sm-12">
+                            <select asp-for="CategoryId" class="form-select" aria-label="Default select example">
+                                <option selected="null"></option>
+                                @foreach (var item in (List<SelectListItem>)ViewBag.Categories)
+                                {
+                                    <option value=@item.Value>@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Picture" class="control-label">Product Picture</label>
+                        <input asp-for="Picture" class="form-control" type="file">
+                        <span asp-validation-for="Picture" class="text-danger"></span>
+                    </div>
+                    <label></label>
+                    <div class="form-group">
+                        <input type="submit" value="Update Product !" class="btn btn-outline-success" />
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="project-info-box mt-0 mb-0">
+            <p class="mb-0">
+                <a href="/product/list" class="btn btn-outline-info"> <i class="fa fa-arrow-left"></i>Back To list </a>
+            </p>
+        </div>
+
+    </div>
+</div>
+

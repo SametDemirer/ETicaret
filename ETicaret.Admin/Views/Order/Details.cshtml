@@ -1,0 +1,113 @@
+﻿@using ETicaret.Data.Entities
+@using ETicaret.Data.Enums
+@model OrderViewModel
+@{
+    ViewData["Title"] = "Edit";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<div class="col-lg-8">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Order Details</h5>
+            <!-- General Form Elements -->
+            <form asp-controller="order" asp-action="edit" method="post">
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Name</label>
+                    <div class="col-sm-10">
+                        <input asp-for="CustomerName" type="text" class="form-control" disabled>
+                        
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputText" class="col-sm-2 col-form-label">Surname</label>
+                    <div class="col-sm-10">
+                        <input asp-for="CustomerSurname" type="text" class="form-control" disabled>
+                    </div>
+                </div>
+             
+                <div class="row mb-3">
+                    <label for="inputPassword" class="col-sm-2 col-form-label">Adress</label>
+                    <div class="col-sm-10">
+                        <textarea asp-for="Adress" disabled class="form-control" style="height: 100px"></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">City</label>
+                    <div class="col-sm-10">
+                        <input asp-for="City" type="text" class="form-control" disabled>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label for="inputEmail" class="col-sm-2 col-form-label">Country</label>
+                    <div class="col-sm-10">
+                        <input asp-for="Country" type="text" class="form-control" disabled>
+                    </div>
+                    </div>
+                <div class="row mb-3">
+                    <label for="inputNumber" class="col-sm-2 col-form-label">Phone</label>
+                    <div class="col-sm-10">                     
+                        <input asp-for="CustomerPhone" type="text" class="form-control" disabled>
+                    </div>
+                </div>
+                
+                <div class="row mb-3">
+                    <label for="inputDate" class="col-sm-2 col-form-label">Order Date</label>
+                    <div class="col-sm-10">
+                        <input asp-for="OrderDate" type="date" class="form-control" disabled>
+                    </div>
+                </div>  
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Order State</label>
+                    <div class="col-sm-10">
+                        <select asp-for="OrderState" disabled class="form-select" aria-label="Default select example">
+                            <option selected=>@Model.OrderState</option>                          
+                        </select>
+                    </div>
+                </div>                
+            </form><!-- End General Form Elements -->
+            <div class="project-info-box mt-0 mb-0">
+                <p class="mb-0">
+                    <a href="/order/list" class="btn btn-outline-info"> <i class="fa fa-arrow-left"></i>Back To list </a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+</div>
+<div class="col-lg-4">
+
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Products</h5>
+
+            <!-- Default Accordion -->
+            <div class="accordion" id="accordionExample">
+               @foreach (var item in Model.Basket.BasketItems)
+                {
+                     <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">  
+                            @item.Product.ProductName
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample" style="">
+                        <div class="accordion-body">
+                            <strong>Unit Price</strong> <h4>@item.Product.UnitPrice</h4>
+                             <strong>Quantity</strong> <h4>@item.Quantity</h4>
+                        </div>
+                    </div>
+                </div>
+                }
+                   
+                
+                
+            </div><!-- End Default Accordion Example -->
+
+        </div>
+    </div>
+
+</div>
+
+

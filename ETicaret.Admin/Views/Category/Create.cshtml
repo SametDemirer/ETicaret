@@ -1,0 +1,59 @@
+﻿@model CategoryViewModel
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+@if (ViewBag.CreateFailed != null)
+{
+    @Html.Raw(ViewBag.CreateFailed)
+}
+<section class="section">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Add New Category</h5>
+
+                    <!-- General Form Elements -->
+                    <form asp-controller="category" asp-action="create" method="post" enctype="multipart/form-data">
+                        <div class="row mb-3">
+                            <label for="inputText" class="col-sm-2 col-form-label">Category Name</label>
+                            <div class="col-sm-10">
+                                <input asp-for="CategoryName" type="text" class="form-control">
+                            </div>
+                            <span asp-validation-for="CategoryName" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="description" class="col-sm-2 col-form-label">Description</label>
+                            <div class="col-sm-10">
+                                <textarea asp-for="Description" class="form-control" style="height: 100px"></textarea>
+                            </div>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="inputNumber" class="col-sm-2 col-form-label">Category Picture</label>
+                            <div class="col-sm-10">
+                                <input asp-for="Picture" class="form-control" type="file">
+                            </div>
+                            <span asp-validation-for="Picture" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="Create" class="btn btn-outline-success" />
+                        </div>
+
+                    </form><!-- End General Form Elements -->
+
+                </div>
+            </div>
+
+            <div class="project-info-box mt-0 mb-0">
+                <p class="mb-0">
+                    <a href="/category/list" class="btn btn-outline-info"> <i class="fa fa-arrow-left"></i>Back To list </a>
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+

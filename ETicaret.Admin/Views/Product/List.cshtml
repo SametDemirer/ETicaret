@@ -1,0 +1,79 @@
+﻿@model IEnumerable<ETicaret.Admin.Models.ProductViewModel>
+
+@{
+    ViewData["Title"] = "List";
+    Layout = "~/Views/Shared/_MainLayout.cshtml";
+}
+
+<h2>Product List</h2>
+
+<p>
+    <a href="/product/create" class="btn btn-outline-success"> <i class="fa fa-plus-circle"></i>  Create New !</a>
+</p>
+@if (TempData["EditState"] != null)
+{
+    <div>
+        @Html.Raw(TempData["EditState"])
+    </div>
+}
+@if (TempData["DeleteState"] != null)
+{
+    <div>
+        @Html.Raw(TempData["DeleteState"])
+    </div>
+}
+@if (TempData["CreateSuccess"] != null)
+{
+    <div>
+        @Html.Raw(TempData["CreateSuccess"])
+    </div>
+}
+
+<div class="card">
+    <div class="card-body">
+        <br />
+        <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" style="text-align:center">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProductName)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitPrice)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.UnitInStock)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Picture)
+                    </th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ProductName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitPrice)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UnitInStock)
+                    </td>
+                    <td>
+                        <img style="width:150px;height: 100px" src="data:image;base64, @item.ImageString" alt="Kategori resmi" />
+                    </td>
+                    <td>
+                        <a href="/product/edit/@item.Id" class="btn btn-outline-warning" title="Edit Product"><i class="fa fa-edit"></i>  Edit</a>
+                        <a href="/product/details/@item.Id" class="btn btn-outline-success" title="Product Details"><i class="fa fa-info-circle"></i>Details</a>
+                        <a href="/product/delete/@item.Id" class="btn btn-outline-danger" title="Delete Product"><i class="fa fa-trash"></i>  Delete</a>
+                    </td>
+                </tr>
+            }
+            </tbody>
+        </table>
+    </div>
+</div>
+

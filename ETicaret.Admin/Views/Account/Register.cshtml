@@ -1,0 +1,71 @@
+﻿@model RegisterViewModel
+@{
+    ViewData["Title"] = "Register";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+@if (ViewBag.Alert != null)
+{
+    <div>
+        @Html.Raw(ViewBag.Alert)
+    </div>
+}
+
+<div class="card mb-3">
+
+    <div class="card-body">
+
+        <div class="pt-4 pb-2">
+            <h5 class="card-title text-center pb-0 fs-4">Create an Account</h5>
+            <p class="text-center small">Enter your personal details to create account</p>
+        </div>
+
+        <form class="user" asp-controller="account" asp-action="register" method="post" enctype="multipart/form-data" >
+            <div class="col-12">
+                <label></label>
+                <input asp-for="Name" type="text" class="form-control" placeholder="Name">
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label></label>
+                <input asp-for="Surname" type="text" class="form-control" placeholder="Surname">
+                <span asp-validation-for="Surname" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label></label>
+                <input asp-for="EMail" type="email" class="form-control" placeholder="example@mail.com">
+                <span asp-validation-for="EMail" class="text-danger"></span>
+            </div>
+
+            <div class="col-12">
+                <label></label>
+                <input asp-for="Password" type="password" class="form-control" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label></label>
+                <input asp-for="ConfirmPassword" type="password" class="form-control" placeholder="Confirm your password">
+                <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+            </div>
+            <label></label>
+            <div class="col-12">
+                @*<label for="inputNumber" class="col-sm-2 col-form-label">Profile Picture</label>*@
+                <div class="col-12">
+                    <label>Profile Picture</label>
+                    <input asp-for="Picture" class="form-control" type="file">
+                </div>
+                <span asp-validation-for="Picture" class="text-danger"></span>
+            </div>
+            <div class="col-12">
+                <label></label>
+                <button href="/account/register" class="btn btn-primary w-100" type="submit">Create Account</button>
+            </div>
+            <label></label>
+            <div class="col-12">
+                <p class="small mb-0">Already have an account? <a href="/acount/login">Log in</a></p>
+            </div>
+        </form>
+
+    </div>
+</div>
+
